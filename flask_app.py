@@ -8,9 +8,10 @@ app.config["DEBUG"] = True
 
 comments= list()
 
-@app.route("/",methods=["GET","POST"] )
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("main_page.html",comments=comments)
+    if request.method == "GET":
+        return render_template("main_page.html", comments=comments)
 
     comments.append(request.form["contents"])
     return redirect(url_for('index'))
